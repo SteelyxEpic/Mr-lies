@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://dwf06kcpky86k"]
+
+[ext_resource type="Script" uid="uid://l253ea25knul" path="res://scenes/computer.gd" id="1_8pqrt"]
+[ext_resource type="Texture2D" uid="uid://cm2see5wwn4si" path="res://bg2.png" id="2_7ikar"]
+[ext_resource type="Texture2D" uid="uid://cuabd83ixh0wg" path="res://mail.png" id="3_7ikar"]
+[ext_resource type="Texture2D" uid="uid://f8qctqi6d8b7" path="res://email.png" id="4_tjrug"]
+[ext_resource type="Texture2D" uid="uid://mnto85ellpn1" path="res://button.png" id="5_uiul0"]
+
+[node name="computer" type="Node2D" unique_id=478502015]
+script = ExtResource("1_8pqrt")
+
+[node name="screen" type="Sprite2D" parent="." unique_id=1552399232]
+position = Vector2(589.00006, 329)
+scale = Vector2(1.2910156, 1.5625)
+texture = ExtResource("2_7ikar")
+
+[node name="shutdown" type="Button" parent="screen" unique_id=1942210657]
+offset_left = -430.6687
+offset_top = 156.8
+offset_right = -339.6687
+offset_bottom = 187.8
+text = "Shut down"
+
+[node name="mail" type="TextureButton" parent="screen" unique_id=778085968]
+offset_left = -426.02124
+offset_top = -177.92
+offset_right = -161.02124
+offset_bottom = 40.08
+scale = Vector2(0.53726274, 0.33624184)
+texture_normal = ExtResource("3_7ikar")
+
+[node name="web" type="TextureButton" parent="screen" unique_id=1768428958]
+offset_left = -419.8245
+offset_top = -88.32
+offset_right = -154.8245
+offset_bottom = 129.68
+scale = Vector2(0.53726274, 0.33624184)
+texture_normal = ExtResource("3_7ikar")
+
+[node name="chat" type="TextureButton" parent="screen" unique_id=1799685445]
+offset_left = -419.8245
+offset_top = 1.2799911
+offset_right = -154.8245
+offset_bottom = 219.28
+scale = Vector2(0.53726274, 0.33624184)
+texture_normal = ExtResource("3_7ikar")
+
+[node name="word" type="RichTextLabel" parent="." unique_id=2046047211]
+visible = false
+offset_left = 422.0
+offset_top = 225.0
+offset_right = 795.0
+offset_bottom = 264.68
+theme_override_colors/font_outline_color = Color(0, 0.19215687, 0.9529412, 0.27058825)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 20
+text = "Mail"
+
+[node name="Email" type="Sprite2D" parent="." unique_id=485101944]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_tjrug")
+
+[node name="close" type="TextureButton" parent="Email" unique_id=1670493318]
+offset_left = 460.0
+offset_top = -245.0
+offset_right = 502.0
+offset_bottom = -199.0
+texture_normal = ExtResource("5_uiul0")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Email" unique_id=2128516998]
+offset_left = -511.0
+offset_top = -247.0
+offset_right = -267.0
+offset_bottom = 242.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Email/ScrollContainer" unique_id=1742081197]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="Button" type="Button" parent="Email/ScrollContainer/VBoxContainer" unique_id=1145276559]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Test"
+
+[node name="content" type="RichTextLabel" parent="Email" unique_id=1039979943]
+offset_left = -239.0
+offset_top = -182.0
+offset_right = 494.0
+offset_bottom = 166.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "ewadasfasfasfasgasga"
+
+[node name="Title" type="RichTextLabel" parent="Email" unique_id=1166752735]
+offset_left = -238.0
+offset_top = -249.0
+offset_right = 407.0
+offset_bottom = -209.0
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 30
+text = " Text Test"
+
+[node name="Button" type="Button" parent="Email" unique_id=161348414]
+offset_left = 309.0
+offset_top = 162.0
+offset_right = 493.0
+offset_bottom = 239.0
+theme_override_font_sizes/font_size = 50
+text = "Accept!"
+
+[connection signal="pressed" from="screen/shutdown" to="." method="shutdown"]
+[connection signal="pressed" from="screen/mail" to="." method="emailopen"]
+[connection signal="pressed" from="screen/web" to="." method="emailopen"]
+[connection signal="pressed" from="screen/chat" to="." method="emailopen"]
+[connection signal="pressed" from="Email/close" to="." method="emailclose"]

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://2542hjdmqyn3"]
+
+[ext_resource type="Script" uid="uid://ce5d2ghx3hxgr" path="res://title.gd" id="1_wosw1"]
+[ext_resource type="Texture2D" uid="uid://b7767sx2b0n8y" path="res://title.png" id="2_p6dhs"]
+[ext_resource type="Texture2D" uid="uid://bu2t0o6u4rnli" path="res://bg.png" id="2_pyl7j"]
+[ext_resource type="Script" uid="uid://dsg5k1dev70fh" path="res://background.gd" id="3_b3w7a"]
+
+[node name="title_screen" type="Node2D" unique_id=1916816428]
+script = ExtResource("1_wosw1")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1810481357]
+offset_right = 1207.0
+offset_bottom = 684.0
+texture = ExtResource("2_pyl7j")
+script = ExtResource("3_b3w7a")
+
+[node name="Node2D" type="Node2D" parent="TextureRect" unique_id=259215049]
+
+[node name="Title" type="Sprite2D" parent="TextureRect/Node2D" unique_id=1339263085]
+position = Vector2(590, 195)
+scale = Vector2(0.64648443, 0.625)
+texture = ExtResource("2_p6dhs")
+
+[node name="Button" type="Button" parent="." unique_id=629470064]
+offset_left = 485.0
+offset_top = 406.0
+offset_right = 676.0
+offset_bottom = 524.0
+theme_override_font_sizes/font_size = 80
+text = "Play!"
+
+[connection signal="pressed" from="Button" to="." method="main"]

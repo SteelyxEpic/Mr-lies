@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://u772v21bw3gs"]
+
+[ext_resource type="Script" uid="uid://cwk0fxl2ev3qw" path="res://scenes/main.gd" id="1_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://cmi0fwoex884b" path="res://pc.png" id="1_o5qli"]
+[ext_resource type="Shader" uid="uid://c54f0tmnx4yfw" path="res://scenes/vignette.gdshader" id="2_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://mnto85ellpn1" path="res://button.png" id="3_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://cm2see5wwn4si" path="res://bg2.png" id="4_tefeu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
+shader = ExtResource("2_tbgi4")
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+shader_parameter/vignette_radius = 2.0
+shader_parameter/vignette_softness = 1.0
+
+[node name="main" type="Node2D" unique_id=679121876]
+script = ExtResource("1_jyhfs")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=628513898]
+position = Vector2(1, 304)
+zoom = Vector2(0.275, 0.275)
+
+[node name="Pc" type="Sprite2D" parent="." unique_id=1109720113]
+position = Vector2(21.999878, 269.99994)
+scale = Vector2(4.3535156, 3.8475347)
+texture = ExtResource("1_o5qli")
+
+[node name="TextureButton" type="TextureButton" parent="Pc" unique_id=422415833]
+offset_left = 160.55992
+offset_top = -6.49765
+offset_right = 202.55992
+offset_bottom = 39.50235
+texture_normal = ExtResource("3_tbgi4")
+
+[node name="Screen" type="Sprite2D" parent="Pc" unique_id=742122867]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+position = Vector2(-72.12559, -43.27445)
+scale = Vector2(0.25886047, 0.403566)
+texture = ExtResource("4_tefeu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=334397134]
+physics_interpolation_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=269062691]
+material = SubResource("ShaderMaterial_tefeu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2104.0
+offset_top = -882.0
+offset_right = 944.0
+offset_bottom = 831.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
