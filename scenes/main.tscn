@@ -15,29 +15,6 @@ shader_parameter/vignette_softness = 1.0
 [node name="main" type="Node2D" unique_id=679121876]
 script = ExtResource("1_jyhfs")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=628513898]
-position = Vector2(1, 304)
-zoom = Vector2(0.275, 0.275)
-
-[node name="Pc" type="Sprite2D" parent="." unique_id=1109720113]
-position = Vector2(21.999878, 269.99994)
-scale = Vector2(4.3535156, 3.8475347)
-texture = ExtResource("1_o5qli")
-
-[node name="TextureButton" type="TextureButton" parent="Pc" unique_id=422415833]
-offset_left = 160.55992
-offset_top = -6.49765
-offset_right = 202.55992
-offset_bottom = 39.50235
-texture_normal = ExtResource("3_tbgi4")
-
-[node name="Screen" type="Sprite2D" parent="Pc" unique_id=742122867]
-modulate = Color(0, 0, 0, 1)
-z_index = -1
-position = Vector2(-72.12559, -43.27445)
-scale = Vector2(0.25886047, 0.403566)
-texture = ExtResource("4_tefeu")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=334397134]
 physics_interpolation_mode = 2
 
@@ -53,3 +30,27 @@ offset_bottom = 831.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=628513898]
+position = Vector2(1, 304)
+zoom = Vector2(0.275, 0.275)
+
+[node name="Pc" type="Sprite2D" parent="." unique_id=1109720113]
+position = Vector2(21.999878, 269.99994)
+scale = Vector2(4.3535156, 3.8475347)
+texture = ExtResource("1_o5qli")
+
+[node name="TextureButton" type="TextureButton" parent="Pc" unique_id=422415833]
+offset_left = 160.55992
+offset_top = -6.49765
+offset_right = 202.55992
+offset_bottom = 39.50235
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_tbgi4")
+
+[node name="Screen" type="Sprite2D" parent="Pc" unique_id=742122867]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+position = Vector2(-72.12559, -43.27445)
+scale = Vector2(0.25886047, 0.403566)
+texture = ExtResource("4_tefeu")

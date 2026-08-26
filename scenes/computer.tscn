@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://l253ea25knul" path="res://scenes/computer.gd" id="1_8pqrt"]
 [ext_resource type="Texture2D" uid="uid://cm2see5wwn4si" path="res://bg2.png" id="2_7ikar"]
 [ext_resource type="Texture2D" uid="uid://cuabd83ixh0wg" path="res://mail.png" id="3_7ikar"]
-[ext_resource type="Texture2D" uid="uid://f8qctqi6d8b7" path="res://email.png" id="4_tjrug"]
+[ext_resource type="Texture2D" uid="uid://cksxjof3du5m" path="res://web.png" id="4_ur38h"]
+[ext_resource type="Texture2D" uid="uid://chiwuj5qc4s6x" path="res://chat.png" id="5_k4214"]
 [ext_resource type="Texture2D" uid="uid://mnto85ellpn1" path="res://button.png" id="5_uiul0"]
+[ext_resource type="Texture2D" uid="uid://d1foymiqstx0d" path="res://webbg.png" id="6_o4fko"]
+[ext_resource type="PackedScene" uid="uid://cs4qm7pqbft28" path="res://peoplebox.tscn" id="8_k4214"]
+[ext_resource type="Script" uid="uid://dunrstkq5jsqc" path="res://scenes/chat.gd" id="9_o4fko"]
 
 [node name="computer" type="Node2D" unique_id=478502015]
 script = ExtResource("1_8pqrt")
@@ -22,28 +26,28 @@ offset_bottom = 187.8
 text = "Shut down"
 
 [node name="mail" type="TextureButton" parent="screen" unique_id=778085968]
-offset_left = -426.02124
-offset_top = -177.92
-offset_right = -161.02124
-offset_bottom = 40.08
+offset_left = -416.72623
+offset_top = -178.56
+offset_right = -151.72623
+offset_bottom = 39.440002
 scale = Vector2(0.53726274, 0.33624184)
 texture_normal = ExtResource("3_7ikar")
 
 [node name="web" type="TextureButton" parent="screen" unique_id=1768428958]
-offset_left = -419.8245
-offset_top = -88.32
-offset_right = -154.8245
-offset_bottom = 129.68
-scale = Vector2(0.53726274, 0.33624184)
-texture_normal = ExtResource("3_7ikar")
+offset_left = -400.46
+offset_top = -85.12
+offset_right = -201.45999
+offset_bottom = 132.88
+scale = Vector2(0.5421556, 0.40382376)
+texture_normal = ExtResource("4_ur38h")
 
 [node name="chat" type="TextureButton" parent="screen" unique_id=1799685445]
-offset_left = -419.8245
-offset_top = 1.2799911
-offset_right = -154.8245
-offset_bottom = 219.28
-scale = Vector2(0.53726274, 0.33624184)
-texture_normal = ExtResource("3_7ikar")
+offset_left = -415.1771
+offset_top = 14.719991
+offset_right = -22.177094
+offset_bottom = 309.72
+scale = Vector2(0.377, 0.316)
+texture_normal = ExtResource("5_k4214")
 
 [node name="word" type="RichTextLabel" parent="." unique_id=2046047211]
 visible = false
@@ -56,18 +60,21 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 20
 text = "Mail"
 
-[node name="Email" type="Sprite2D" parent="." unique_id=485101944]
+[node name="site" type="Sprite2D" parent="." unique_id=485101944]
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("4_tjrug")
+texture = ExtResource("6_o4fko")
 
-[node name="close" type="TextureButton" parent="Email" unique_id=1670493318]
+[node name="close" type="TextureButton" parent="site" unique_id=1670493318]
 offset_left = 460.0
 offset_top = -245.0
 offset_right = 502.0
 offset_bottom = -199.0
 texture_normal = ExtResource("5_uiul0")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Email" unique_id=2128516998]
+[node name="Email" type="Node2D" parent="site" unique_id=467295365]
+visible = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="site/Email" unique_id=2128516998]
 offset_left = -511.0
 offset_top = -247.0
 offset_right = -267.0
@@ -75,18 +82,16 @@ offset_bottom = 242.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Email/ScrollContainer" unique_id=1742081197]
+[node name="VBoxContainer" type="VBoxContainer" parent="site/Email/ScrollContainer" unique_id=1742081197]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 6
 
-[node name="Button" type="Button" parent="Email/ScrollContainer/VBoxContainer" unique_id=1145276559]
+[node name="peoplebox" parent="site/Email/ScrollContainer/VBoxContainer" unique_id=951294105 instance=ExtResource("8_k4214")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Test"
 
-[node name="content" type="RichTextLabel" parent="Email" unique_id=1039979943]
+[node name="content" type="RichTextLabel" parent="site/Email" unique_id=1039979943]
 offset_left = -239.0
 offset_top = -182.0
 offset_right = 494.0
@@ -94,7 +99,7 @@ offset_bottom = 166.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "ewadasfasfasfasgasga"
 
-[node name="Title" type="RichTextLabel" parent="Email" unique_id=1166752735]
+[node name="Title" type="RichTextLabel" parent="site/Email" unique_id=1166752735]
 offset_left = -238.0
 offset_top = -249.0
 offset_right = 407.0
@@ -103,7 +108,7 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/normal_font_size = 30
 text = " Text Test"
 
-[node name="Button" type="Button" parent="Email" unique_id=161348414]
+[node name="Button" type="Button" parent="site/Email" unique_id=161348414]
 offset_left = 309.0
 offset_top = 162.0
 offset_right = 493.0
@@ -111,8 +116,67 @@ offset_bottom = 239.0
 theme_override_font_sizes/font_size = 50
 text = "Accept!"
 
+[node name="Chat" type="Node2D" parent="site" unique_id=1566750123]
+visible = false
+script = ExtResource("9_o4fko")
+
+[node name="people" type="ScrollContainer" parent="site/Chat" unique_id=1824909283]
+offset_left = -511.0
+offset_top = -247.0
+offset_right = -138.0
+offset_bottom = 242.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="site/Chat/people" unique_id=995610970]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="chatbox" type="ScrollContainer" parent="site/Chat" unique_id=909890696]
+offset_left = -124.0
+offset_top = -188.0
+offset_right = 502.0
+offset_bottom = 174.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="site/Chat/chatbox" unique_id=549985595]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+alignment = 2
+
+[node name="Button" type="Button" parent="site/Chat" unique_id=1466461537]
+offset_left = -124.0
+offset_top = 201.0
+offset_right = 513.0
+offset_bottom = 251.0
+theme_override_font_sizes/font_size = 30
+text = "Next"
+
+[node name="Web" type="Node2D" parent="site" unique_id=1768302204]
+visible = false
+
+[node name="LineEdit" type="LineEdit" parent="site/Web" unique_id=1237477857]
+offset_left = -325.0
+offset_top = -34.0
+offset_right = 337.0
+offset_bottom = 10.0
+
+[node name="Button" type="Button" parent="site/Web" unique_id=935905708]
+offset_left = -91.0
+offset_top = 111.0
+offset_right = 94.0
+offset_bottom = 188.0
+theme_override_font_sizes/font_size = 50
+text = "Search!"
+
 [connection signal="pressed" from="screen/shutdown" to="." method="shutdown"]
 [connection signal="pressed" from="screen/mail" to="." method="emailopen"]
 [connection signal="pressed" from="screen/web" to="." method="emailopen"]
 [connection signal="pressed" from="screen/chat" to="." method="emailopen"]
-[connection signal="pressed" from="Email/close" to="." method="emailclose"]
+[connection signal="pressed" from="site/close" to="." method="emailclose"]
+[connection signal="pressed" from="site/Chat/Button" to="site/Chat" method="chat"]

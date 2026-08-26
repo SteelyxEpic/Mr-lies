@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cs4qm7pqbft28"]
+
+[ext_resource type="Texture2D" uid="uid://c6s45yjxk58lc" path="res://alert.png" id="1_ebgo5"]
+[ext_resource type="Script" uid="uid://bmifg64g0mr0h" path="res://peoplebox.gd" id="1_rrg85"]
+
+[node name="peoplebox" type="Button" unique_id=951294105]
+theme_override_font_sizes/font_size = 40
+text = "Test"
+script = ExtResource("1_rrg85")
+
+[node name="Alert" type="Sprite2D" parent="." unique_id=876807095]
+visible = false
+position = Vector2(26.999996, 31.000004)
+scale = Vector2(0.16935481, 0.16265063)
+texture = ExtResource("1_ebgo5")

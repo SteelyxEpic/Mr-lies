@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://drxn2mumyo8dt"]
+
+[node name="chatting" type="RichTextLabel" unique_id=918410565]
+z_index = 2
+fit_content = true
