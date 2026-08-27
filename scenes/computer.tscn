@@ -6,9 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://cksxjof3du5m" path="res://web.png" id="4_ur38h"]
 [ext_resource type="Texture2D" uid="uid://chiwuj5qc4s6x" path="res://chat.png" id="5_k4214"]
 [ext_resource type="Texture2D" uid="uid://mnto85ellpn1" path="res://button.png" id="5_uiul0"]
-[ext_resource type="Texture2D" uid="uid://d1foymiqstx0d" path="res://webbg.png" id="6_o4fko"]
+[ext_resource type="Texture2D" uid="uid://bc6lr5exxaxvl" path="res://media.png" id="6_wlfat"]
 [ext_resource type="PackedScene" uid="uid://cs4qm7pqbft28" path="res://peoplebox.tscn" id="8_k4214"]
 [ext_resource type="Script" uid="uid://dunrstkq5jsqc" path="res://scenes/chat.gd" id="9_o4fko"]
+[ext_resource type="Texture2D" uid="uid://cxyjppw2apvhg" path="res://waitweb.png" id="10_88chw"]
+[ext_resource type="PackedScene" uid="uid://bv3rf0vgf85fy" path="res://searches.tscn" id="11_n81s5"]
+[ext_resource type="Texture2D" uid="uid://dn6p7sb4a88sa" path="res://arrow.png" id="12_c6j5k"]
 
 [node name="computer" type="Node2D" unique_id=478502015]
 script = ExtResource("1_8pqrt")
@@ -61,14 +64,13 @@ theme_override_font_sizes/normal_font_size = 20
 text = "Mail"
 
 [node name="site" type="Sprite2D" parent="." unique_id=485101944]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("6_o4fko")
+texture = ExtResource("6_wlfat")
 
 [node name="close" type="TextureButton" parent="site" unique_id=1670493318]
-offset_left = 460.0
-offset_top = -245.0
-offset_right = 502.0
-offset_bottom = -199.0
+offset_left = 463.0
+offset_top = -248.0
+offset_right = 505.0
+offset_bottom = -202.0
 texture_normal = ExtResource("5_uiul0")
 
 [node name="Email" type="Node2D" parent="site" unique_id=467295365]
@@ -97,7 +99,8 @@ offset_top = -182.0
 offset_right = 494.0
 offset_bottom = 166.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "ewadasfasfasfasgasga"
+text = "
+"
 
 [node name="Title" type="RichTextLabel" parent="site/Email" unique_id=1166752735]
 offset_left = -238.0
@@ -106,18 +109,17 @@ offset_right = 407.0
 offset_bottom = -209.0
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/normal_font_size = 30
-text = " Text Test"
 
-[node name="Button" type="Button" parent="site/Email" unique_id=161348414]
+[node name="accept" type="Button" parent="site/Email" unique_id=161348414]
 offset_left = 309.0
 offset_top = 162.0
 offset_right = 493.0
 offset_bottom = 239.0
 theme_override_font_sizes/font_size = 50
+disabled = true
 text = "Accept!"
 
 [node name="Chat" type="Node2D" parent="site" unique_id=1566750123]
-visible = false
 script = ExtResource("9_o4fko")
 
 [node name="people" type="ScrollContainer" parent="site/Chat" unique_id=1824909283]
@@ -149,7 +151,8 @@ size_flags_vertical = 3
 theme_override_constants/separation = 4
 alignment = 2
 
-[node name="Button" type="Button" parent="site/Chat" unique_id=1466461537]
+[node name="next" type="Button" parent="site/Chat" unique_id=1466461537]
+visible = false
 offset_left = -124.0
 offset_top = 201.0
 offset_right = 513.0
@@ -157,10 +160,75 @@ offset_bottom = 251.0
 theme_override_font_sizes/font_size = 30
 text = "Next"
 
+[node name="answer" type="Node2D" parent="site/Chat" unique_id=1591556783]
+visible = false
+
+[node name="LineEdit" type="LineEdit" parent="site/Chat/answer" unique_id=2038253263]
+offset_left = -127.0
+offset_top = 202.0
+offset_right = 376.0
+offset_bottom = 253.0
+
+[node name="Button" type="Button" parent="site/Chat/answer" unique_id=1299907865]
+offset_left = 383.0
+offset_top = 203.0
+offset_right = 508.0
+offset_bottom = 251.0
+theme_override_font_sizes/font_size = 30
+text = "Answer"
+
+[node name="dateconfirm" type="Node2D" parent="site/Chat/answer" unique_id=541991239]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="site/Chat/answer/dateconfirm" unique_id=576835900]
+offset_left = -100.0
+offset_top = -106.0
+offset_right = 924.0
+offset_bottom = 406.0
+scale = Vector2(0.555, 0.415)
+texture = ExtResource("2_7ikar")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="site/Chat/answer/dateconfirm" unique_id=1149927935]
+offset_left = -99.0
+offset_top = -107.0
+offset_right = 467.0
+offset_bottom = -37.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Are you sure you want to input...."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="date" type="RichTextLabel" parent="site/Chat/answer/dateconfirm" unique_id=1021568652]
+offset_left = -98.0
+offset_top = -27.0
+offset_right = 468.0
+offset_bottom = 25.0
+theme_override_font_sizes/normal_font_size = 24
+text = "12/12/2003"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Yes" type="Button" parent="site/Chat/answer/dateconfirm" unique_id=1294544640]
+offset_left = 13.0
+offset_top = 22.0
+offset_right = 104.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 50
+text = "Yes
+"
+
+[node name="No" type="Button" parent="site/Chat/answer/dateconfirm" unique_id=919994251]
+offset_left = 284.0
+offset_top = 21.0
+offset_right = 362.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 50
+text = "No"
+
 [node name="Web" type="Node2D" parent="site" unique_id=1768302204]
 visible = false
 
-[node name="LineEdit" type="LineEdit" parent="site/Web" unique_id=1237477857]
+[node name="searchbar" type="LineEdit" parent="site/Web" unique_id=1237477857]
 offset_left = -325.0
 offset_top = -34.0
 offset_right = 337.0
@@ -174,9 +242,113 @@ offset_bottom = 188.0
 theme_override_font_sizes/font_size = 50
 text = "Search!"
 
+[node name="Websearch" type="Node2D" parent="site" unique_id=739080039]
+visible = false
+
+[node name="loading" type="TextureRect" parent="site/Websearch" unique_id=903274283]
+visible = false
+offset_left = -250.0
+offset_top = -230.0
+offset_right = 252.0
+offset_bottom = 223.0
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(250, 228)
+texture = ExtResource("10_88chw")
+
+[node name="searchbar" type="LineEdit" parent="site/Websearch" unique_id=1329237539]
+offset_left = -478.0
+offset_top = -242.0
+offset_right = 333.0
+offset_bottom = -211.0
+
+[node name="search" type="Button" parent="site/Websearch" unique_id=1916187703]
+offset_left = 357.0
+offset_top = -244.0
+offset_right = 436.0
+offset_bottom = -208.0
+theme_override_font_sizes/font_size = 20
+text = "Search!"
+
+[node name="searcharea" type="ScrollContainer" parent="site/Websearch" unique_id=572267714]
+visible = false
+offset_left = -503.0
+offset_top = -188.0
+offset_right = 502.0
+offset_bottom = 251.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="site/Websearch/searcharea" unique_id=1550975125]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[node name="Searches" parent="site/Websearch/searcharea/VBoxContainer" unique_id=185581318 instance=ExtResource("11_n81s5")]
+layout_mode = 2
+
+[node name="nomore" type="RichTextLabel" parent="site/Websearch/searcharea/VBoxContainer" unique_id=1720051793]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "No more related information"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mediaxwork" type="Node2D" parent="site" unique_id=980488298]
+visible = false
+
+[node name="back" type="TextureButton" parent="site/Mediaxwork" unique_id=1860235717]
+offset_left = -503.00003
+offset_top = -248.0
+offset_right = -37.00003
+offset_bottom = 108.0
+scale = Vector2(0.082, 0.08)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_c6j5k")
+
+[node name="TextureButton2" type="TextureButton" parent="site/Mediaxwork" unique_id=385782261]
+modulate = Color(1, 1, 1, 0.5411765)
+offset_left = -462.0
+offset_top = -248.0
+offset_right = 4.0
+offset_bottom = 108.0
+scale = Vector2(0.082, 0.08)
+disabled = true
+texture_normal = ExtResource("12_c6j5k")
+flip_h = true
+
+[node name="news" type="RichTextLabel" parent="site/Mediaxwork" unique_id=1462486212]
+offset_left = -392.0
+offset_top = -247.0
+offset_right = 439.0
+offset_bottom = -95.0
+theme_override_font_sizes/normal_font_size = 50
+
+[node name="content" type="RichTextLabel" parent="site/Mediaxwork" unique_id=514629073]
+offset_left = -447.0
+offset_top = -59.0
+offset_right = 447.0
+offset_bottom = 218.0
+
+[node name="media" type="RichTextLabel" parent="site/Mediaxwork" unique_id=1025200994]
+offset_left = -420.0
+offset_top = -189.0
+offset_right = 419.0
+offset_bottom = -22.0
+theme_override_font_sizes/normal_font_size = 50
+text = "Test test"
+
 [connection signal="pressed" from="screen/shutdown" to="." method="shutdown"]
 [connection signal="pressed" from="screen/mail" to="." method="emailopen"]
 [connection signal="pressed" from="screen/web" to="." method="emailopen"]
 [connection signal="pressed" from="screen/chat" to="." method="emailopen"]
 [connection signal="pressed" from="site/close" to="." method="emailclose"]
-[connection signal="pressed" from="site/Chat/Button" to="site/Chat" method="chat"]
+[connection signal="pressed" from="site/Chat/next" to="site/Chat" method="chat"]
+[connection signal="focus_entered" from="site/Chat/answer/LineEdit" to="site/Chat" method="_on_line_edit_focus_entered"]
+[connection signal="pressed" from="site/Chat/answer/Button" to="site/Chat" method="checkanswer"]
+[connection signal="text_submitted" from="site/Web/searchbar" to="." method="search"]
+[connection signal="pressed" from="site/Web/Button" to="." method="search"]
+[connection signal="text_submitted" from="site/Websearch/searchbar" to="." method="search"]
+[connection signal="pressed" from="site/Websearch/search" to="." method="search"]
+[connection signal="pressed" from="site/Mediaxwork/back" to="." method="returns"]

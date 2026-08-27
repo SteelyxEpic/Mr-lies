@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cwk0fxl2ev3qw" path="res://scenes/main.gd" id="1_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://cmi0fwoex884b" path="res://pc.png" id="1_o5qli"]
 [ext_resource type="Shader" uid="uid://c54f0tmnx4yfw" path="res://scenes/vignette.gdshader" id="2_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://bh80h3a1ln23y" path="res://table.png" id="2_tefeu"]
 [ext_resource type="Texture2D" uid="uid://mnto85ellpn1" path="res://button.png" id="3_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://cm2see5wwn4si" path="res://bg2.png" id="4_tefeu"]
 
@@ -14,6 +15,11 @@ shader_parameter/vignette_softness = 1.0
 
 [node name="main" type="Node2D" unique_id=679121876]
 script = ExtResource("1_jyhfs")
+
+[node name="Table" type="Sprite2D" parent="." unique_id=1819707303]
+position = Vector2(-87, 362)
+scale = Vector2(4.6337895, 4.445252)
+texture = ExtResource("2_tefeu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=334397134]
 physics_interpolation_mode = 2
