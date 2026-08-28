@@ -2,7 +2,10 @@ extends Node
 
 var shut = false
 var save_location = "user://save.json"
-var default: Dictionary = {"people_known": [],
+var default: Dictionary = {
+	"reputation": 0,
+	"money": 0,
+	"people_known": [],
   "searches": {
 	"Dickson": {
 	  "news": {
@@ -83,9 +86,9 @@ var default: Dictionary = {"people_known": [],
   },
 
 "text": {
-	"Garwin1": "Garwin=me,hello! Is this Garwin?,Garwin,Yes! If you're texting does that mean you accepted my request?,me,yeap,me,you said you can provide me with information about your mother first?,Garwin,Yes! Her name is Betty Herman, born in 1996 and she is working at the Golden Horse,Garwin,Please help me,me,I'll see what I can do,Garwin,thank youu!|22/4/1996|Garwinyes|Garwinno",
-	"Garwinyes":"Garwin=Garwin,That's the one!,Garwin,Thanks a lot!,me,no problem,me,I am expecting my payment soon tho,Garwin,yes! Of course!,Garwin,You'll get it in your account soon!+100",
-	"Garwinno":"Garwin=Garwin,...,Garwin,no that's not it|22/4/1996|Garwinyes|Garwinno",
+	"Garwin1": "Garwin=me,hello! Is this Garwin?,Garwin,Yes! If you're texting does that mean you accepted my request?,me,yeap,me,you said you can provide me with information about your mother first?,Garwin,Yes! Her name is Betty Herman,Garwin,born in 1996,Garwin,and she is working at the Golden Horse,Garwin,Please help me,me,I'll see what I can do,Garwin,thank youu!|22/4/1996|Garwinyes|Garwinno",
+	"Garwinyes":"Garwin=Garwin,That's the one!,Garwin,Thanks a lot!,me,no problem,me,I am expecting my payment soon tho,Garwin,yes! Of course!,Garwin,You'll get it in your account soon!+100_30",
+	"Garwinno":"Garwin=Garwin,...,Garwin,no that's not it_-5|22/4/1996|Garwinyes|Garwinno",
 }
 ,
 "read":[]}

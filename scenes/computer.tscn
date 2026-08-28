@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://cxyjppw2apvhg" path="res://waitweb.png" id="10_88chw"]
 [ext_resource type="PackedScene" uid="uid://bv3rf0vgf85fy" path="res://searches.tscn" id="11_n81s5"]
 [ext_resource type="Texture2D" uid="uid://dn6p7sb4a88sa" path="res://arrow.png" id="12_c6j5k"]
+[ext_resource type="Texture2D" uid="uid://o08td4dn54rd" path="res://icon.svg" id="13_3swsi"]
+[ext_resource type="PackedScene" uid="uid://d1npvhfmbyoyv" path="res://mediacontent.tscn" id="14_m1r6p"]
 
 [node name="computer" type="Node2D" unique_id=478502015]
 script = ExtResource("1_8pqrt")
@@ -120,6 +122,7 @@ disabled = true
 text = "Accept!"
 
 [node name="Chat" type="Node2D" parent="site" unique_id=1566750123]
+visible = false
 script = ExtResource("9_o4fko")
 
 [node name="people" type="ScrollContainer" parent="site/Chat" unique_id=1824909283]
@@ -295,10 +298,9 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Mediaxwork" type="Node2D" parent="site" unique_id=980488298]
-visible = false
+[node name="Media" type="Node2D" parent="site" unique_id=980488298]
 
-[node name="back" type="TextureButton" parent="site/Mediaxwork" unique_id=1860235717]
+[node name="back" type="TextureButton" parent="site/Media" unique_id=1860235717]
 offset_left = -503.00003
 offset_top = -248.0
 offset_right = -37.00003
@@ -307,7 +309,7 @@ scale = Vector2(0.082, 0.08)
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("12_c6j5k")
 
-[node name="TextureButton2" type="TextureButton" parent="site/Mediaxwork" unique_id=385782261]
+[node name="TextureButton2" type="TextureButton" parent="site/Media" unique_id=385782261]
 modulate = Color(1, 1, 1, 0.5411765)
 offset_left = -462.0
 offset_top = -248.0
@@ -318,26 +320,65 @@ disabled = true
 texture_normal = ExtResource("12_c6j5k")
 flip_h = true
 
-[node name="news" type="RichTextLabel" parent="site/Mediaxwork" unique_id=1462486212]
+[node name="HBoxContainer" type="HBoxContainer" parent="site/Media" unique_id=828962840]
+offset_left = -509.0
+offset_top = -200.0
+offset_right = 509.0
+offset_bottom = 256.0
+
+[node name="Avatar" type="TextureRect" parent="site/Media/HBoxContainer" unique_id=369688831]
+layout_mode = 2
+size_flags_vertical = 0
+offset_transform_enabled = true
+texture = ExtResource("13_3swsi")
+stretch_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="site/Media/HBoxContainer" unique_id=1807035195]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="content" type="VBoxContainer" parent="site/Media/HBoxContainer/ScrollContainer" unique_id=1160974749]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Mediacontent" parent="site/Media/HBoxContainer/ScrollContainer/content" unique_id=406801665 instance=ExtResource("14_m1r6p")]
+layout_mode = 2
+
+[node name="News" type="Node2D" parent="site" unique_id=2116208392]
+visible = false
+
+[node name="back" type="TextureButton" parent="site/News" unique_id=659246117]
+offset_left = -503.00003
+offset_top = -248.0
+offset_right = -37.00003
+offset_bottom = 108.0
+scale = Vector2(0.082, 0.08)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_c6j5k")
+
+[node name="TextureButton2" type="TextureButton" parent="site/News" unique_id=1744350906]
+modulate = Color(1, 1, 1, 0.5411765)
+offset_left = -462.0
+offset_top = -248.0
+offset_right = 4.0
+offset_bottom = 108.0
+scale = Vector2(0.082, 0.08)
+disabled = true
+texture_normal = ExtResource("12_c6j5k")
+flip_h = true
+
+[node name="news" type="RichTextLabel" parent="site/News" unique_id=1614683647]
 offset_left = -392.0
-offset_top = -247.0
+offset_top = -252.0
 offset_right = 439.0
 offset_bottom = -95.0
 theme_override_font_sizes/normal_font_size = 50
 
-[node name="content" type="RichTextLabel" parent="site/Mediaxwork" unique_id=514629073]
+[node name="content" type="RichTextLabel" parent="site/News" unique_id=1561884796]
 offset_left = -447.0
-offset_top = -59.0
+offset_top = -68.0
 offset_right = 447.0
 offset_bottom = 218.0
-
-[node name="media" type="RichTextLabel" parent="site/Mediaxwork" unique_id=1025200994]
-offset_left = -420.0
-offset_top = -189.0
-offset_right = 419.0
-offset_bottom = -22.0
-theme_override_font_sizes/normal_font_size = 50
-text = "Test test"
 
 [connection signal="pressed" from="screen/shutdown" to="." method="shutdown"]
 [connection signal="pressed" from="screen/mail" to="." method="emailopen"]
@@ -351,4 +392,5 @@ text = "Test test"
 [connection signal="pressed" from="site/Web/Button" to="." method="search"]
 [connection signal="text_submitted" from="site/Websearch/searchbar" to="." method="search"]
 [connection signal="pressed" from="site/Websearch/search" to="." method="search"]
-[connection signal="pressed" from="site/Mediaxwork/back" to="." method="returns"]
+[connection signal="pressed" from="site/Media/back" to="." method="returns"]
+[connection signal="pressed" from="site/News/back" to="." method="returns"]

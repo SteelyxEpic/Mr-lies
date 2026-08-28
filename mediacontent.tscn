@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d1npvhfmbyoyv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oam8o"]
+bg_color = Color(0.6, 0.6, 0.8039216, 1)
+
+[node name="PanelContainer" type="PanelContainer" unique_id=472372674]
+offset_right = 652.0
+offset_bottom = 96.0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_oam8o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1378994550]
+layout_mode = 2
+
+[node name="media" type="RichTextLabel" parent="VBoxContainer" unique_id=204187519]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "fafadogasifjasofas"
+fit_content = true
+
+[node name="content" type="RichTextLabel" parent="VBoxContainer" unique_id=1950820307]
+layout_mode = 2
+text = "sda"
+fit_content = true

@@ -8,7 +8,8 @@ extends Node2D
 @onready var siteweb: Node2D = $site/Web
 @onready var sitechat: Node2D = $site/Chat
 @onready var sitewebsearch: Node2D = $site/Websearch
-@onready var sitemediaxnews: Node2D = $site/Mediaxwork
+@onready var sitemedia: Node2D = $site/Media
+@onready var sitenews: Node2D = $site/News
 @onready var closes: TextureButton = $site/close
 @onready var word:RichTextLabel = $word
 @onready var email:Sprite2D = $site
@@ -20,7 +21,9 @@ extends Node2D
 @onready var newsbg:Texture2D = preload("res://newsbg.png")
 @onready var searchprefab: PackedScene = preload("res://searches.tscn")
 @onready var peopleprefab: PackedScene = preload("res://peoplebox.tscn")
+@onready var mediaprefab: PackedScene = preload("res://mediacontent.tscn")
 var temp
+var currenticon: TextureButton
 var prev:String
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,7 +36,8 @@ func _ready() -> void:
 	mail.pressed.connect(func():
 		emailcheck()
 		email.texture = emailbg
-		sitemediaxnews.hide()
+		sitemedia.hide()
+		sitenews.hide()
 		sitewebsearch.hide()
 		sitechat.hide()
 		sitemail.show()
@@ -48,7 +52,8 @@ func _ready() -> void:
 	web.pressed.connect(func():
 		email.texture = webbg
 		open(web)
-		sitemediaxnews.hide()
+		sitemedia.hide()
+		sitenews.hide()
 		sitechat.hide()
 		sitewebsearch.hide()
 		sitemail.hide()
@@ -61,14 +66,20 @@ func _ready() -> void:
 	chat.pressed.connect(func():
 		email.texture = chatbg
 		open(chat)
-		sitemediaxnews.hide()
+		sitemedia.hide()
+		sitenews.hide()
 		sitechat.show()
 		sitewebsearch.hide()
 		sitemail.hide()
 		siteweb.hide())
 
 func open(icon):
+	if currenticon == icon:
+		close(icon)
+		return
 	email.position =  icon.global_position + (icon.size/2*icon.scale)
+	email.scale = Vector2(0,0)
+	currenticon = icon
 	var emailtween = get_tree().create_tween().set_parallel(true)
 	emailtween.tween_property(email, "position", Vector2(590, 333), 0.2)
 	emailtween.tween_property(email, "scale", Vector2(1, 1), 0.2)
@@ -118,6 +129,7 @@ func acceptemail(key:String):
 	Global.data["read"].append(key)
 		
 func close(icon):
+	currenticon = null
 	var emailtween = get_tree().create_tween().set_parallel(true)
 	emailtween.tween_property(email, "position", icon.global_position + (icon.size/2*icon.scale), 0.2)
 	emailtween.tween_property(email, "scale", Vector2(0, 0), 0.2)
@@ -159,6 +171,7 @@ func search(test:String = "", reload: bool = true):
 	var query = {}
 	for i in Global.data["searches"].keys():
 		if searches.to_upper().contains(i.to_upper()):
+			prev = i
 			query = Global.data["searches"][i]
 			break
 	for i in query.keys():
@@ -166,7 +179,7 @@ func search(test:String = "", reload: bool = true):
 			var instance = searchprefab.instantiate()
 			instance.text = x
 			instance.pressed.connect(func():
-				prev = searches
+				
 				contentadd(i, x, query[i][x]))
 			searcharea.get_node("VBoxContainer").add_child(instance)
 	searcharea.get_node("VBoxContainer").move_child(searcharea.get_node("VBoxContainer").get_node("nomore"), -1)
@@ -174,21 +187,27 @@ func search(test:String = "", reload: bool = true):
 	siteweb.get_node("searchbar").text = ""
 	
 func returns():
-	sitemediaxnews.hide()
+	sitemedia.hide()
+	sitenews.hide()
 	search(prev, false)
 func contentadd(type:String, title:String, content:String):
-	sitemediaxnews.show()
+	
 	sitewebsearch.hide()
-	sitemediaxnews.get_node("content").text = content
 	if type == "news":
-		sitemediaxnews.get_node("news").text = title
-		sitemediaxnews.get_node("news").show()
-		sitemediaxnews.get_node("media").hide()
+		sitenews.show()
+		sitenews.get_node("news").text = title
+		sitenews.get_node("content").text = content
 		email.texture = newsbg
 	elif type == "Media":
-		sitemediaxnews.get_node("media").text = title
-		sitemediaxnews.get_node("media").show()
-		sitemediaxnews.get_node("news").hide()
+		sitemedia.show()
+		var mediacontent = sitemedia.get_node("HBoxContainer/ScrollContainer/content")
+		for i in mediacontent.get_children():
+			i.queue_free()
+		for i in Global.data["searches"][prev]["Media"].keys():
+			var instance = mediaprefab.instantiate()
+			mediacontent.add_child(instance)
+			instance.get_node("VBoxContainer/media").text = i
+			instance.get_node("VBoxContainer/content").text = Global.data["searches"][prev]["Media"][i]
 		email.texture = mediabg
 	
 func _process(delta: float) -> void:

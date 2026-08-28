@@ -11,6 +11,7 @@ var current: Array[Dictionary] = []
 var currentalert: Sprite2D
 var currenttext: String = ""
 var Ans:PackedStringArray
+var ansindex: int = 0
 
 func _ready() -> void:
 	recheck()
@@ -37,13 +38,24 @@ func recheck():
 
 func chat(recap: bool = false):
 	var instance = chatting.instantiate()
-	var ques = current[0]["message"].contains("|")
-	if ques:
-		Ans = current[0]["message"].split("|")
-		instance.text = Ans[0]
+	var special = {
+		"ques": ["|", 0, 0],
+		"gain": ["+", 0, 0],
+		"rep": ["_", 0, 0]
+	}
+	var temp = []
+	instance.text = current[0]["message"]
+	
+	for i in special.keys():
+		special[i][1] = instance.text.find(special[i][0])
+		if special[i][1] > 0:
+			temp.append(i)
+		instance.text = instance.text.replace(special[i][0], "|")
+	temp.sort_custom(func(a, b):
+		return special[a][1] < special[b][1])
+	Ans = instance.text.split("|")
+	instance.text = Ans[0]
 		
-	else:
-		instance.text = current[0]["message"]
 	if current[0]["messager"] == "me":
 		instance.set_horizontal_alignment(2)
 	chattingarea.add_child(instance)
@@ -57,8 +69,15 @@ func chat(recap: bool = false):
 		var scrollbar = chattingareascroll.get_v_scroll_bar()
 		chattingareascroll.scroll_vertical = int(scrollbar.max_value)
 	current.remove_at(0)
+	for i in range(len(temp)):
+		if temp[i] == "gain":
+			Global.data["money"] += Ans[i + 1].to_float()
+		elif temp[i] == "rep":
+			Global.data["reputation"] += Ans[i + 1].to_float()
+		elif temp[i] == "ques":
+			ansindex = i
 	if len(current) == 0 and !recap:
-		if ques:
+		if special["ques"][1] > 0:
 			$answer.show()
 		next.hide()
 		currentalert.hide()
@@ -173,11 +192,11 @@ func checkanswer():
 	$answer.hide()
 	var checkans = dateformatter(answer.get_node("LineEdit").text)
 	var temp = "me," + checkans + ","
-	if checkans.contains(Ans[1]):
-		var content = Global.data["text"][Ans[2]].split("=")
+	if checkans.contains(Ans[ansindex + 1]):
+		var content = Global.data["text"][Ans[ansindex + 2]].split("=")
 		temp += content[1] + ","
 	else:
-		var content = Global.data["text"][Ans[3]].split("=")
+		var content = Global.data["text"][Ans[ansindex + 3]].split("=")
 		temp += content[1] + ","
 	for i in range(len(Global.data["people_known"])):
 		if currenttext == Global.data["people_known"][i].keys()[0]:
