@@ -122,8 +122,21 @@ disabled = true
 text = "Accept!"
 
 [node name="Chat" type="Node2D" parent="site" unique_id=1566750123]
-visible = false
 script = ExtResource("9_o4fko")
+
+[node name="choice" type="Node2D" parent="site/Chat" unique_id=640332824]
+visible = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="site/Chat/choice" unique_id=591378521]
+offset_left = -126.0
+offset_top = 203.0
+offset_right = 515.0
+offset_bottom = 257.0
+
+[node name="content" type="HBoxContainer" parent="site/Chat/choice/ScrollContainer" unique_id=930371042]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="people" type="ScrollContainer" parent="site/Chat" unique_id=1824909283]
 offset_left = -511.0
@@ -155,7 +168,6 @@ theme_override_constants/separation = 4
 alignment = 2
 
 [node name="next" type="Button" parent="site/Chat" unique_id=1466461537]
-visible = false
 offset_left = -124.0
 offset_top = 201.0
 offset_right = 513.0
@@ -299,6 +311,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Media" type="Node2D" parent="site" unique_id=980488298]
+visible = false
 
 [node name="back" type="TextureButton" parent="site/Media" unique_id=1860235717]
 offset_left = -503.00003

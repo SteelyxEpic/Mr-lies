@@ -87,8 +87,9 @@ var default: Dictionary = {
 
 "text": {
 	"Garwin1": "Garwin=me,hello! Is this Garwin?,Garwin,Yes! If you're texting does that mean you accepted my request?,me,yeap,me,you said you can provide me with information about your mother first?,Garwin,Yes! Her name is Betty Herman,Garwin,born in 1996,Garwin,and she is working at the Golden Horse,Garwin,Please help me,me,I'll see what I can do,Garwin,thank youu!|22/4/1996|Garwinyes|Garwinno",
-	"Garwinyes":"Garwin=Garwin,That's the one!,Garwin,Thanks a lot!,me,no problem,me,I am expecting my payment soon tho,Garwin,yes! Of course!,Garwin,You'll get it in your account soon!+100_30",
+	"Garwinyes":"Garwin=Garwin,That's the one!,Garwin,Thanks a lot!,me,no problem,me,I am expecting my payment soon tho,Garwin,yes! Of course!,Garwin,You'll get it in your account soon!+100_30>Pleasure doing business<Garwinthank>Thank you kindly<Garwinthank",
 	"Garwinno":"Garwin=Garwin,...,Garwin,no that's not it_-5|22/4/1996|Garwinyes|Garwinno",
+	"Garwinthank":"Garwin=Garwin,Thanks again!"
 }
 ,
 "read":[]}

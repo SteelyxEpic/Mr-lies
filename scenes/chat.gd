@@ -41,13 +41,15 @@ func chat(recap: bool = false):
 	var special = {
 		"ques": ["|", 0, 0],
 		"gain": ["+", 0, 0],
-		"rep": ["_", 0, 0]
+		"rep": ["_", 0, 0],
+		"choice": [">", 0, 0]
 	}
 	var temp = []
 	instance.text = current[0]["message"]
 	
 	for i in special.keys():
 		special[i][1] = instance.text.find(special[i][0])
+		special[i][2] = instance.text.count(special[i][0])
 		if special[i][1] > 0:
 			temp.append(i)
 		instance.text = instance.text.replace(special[i][0], "|")
@@ -76,6 +78,25 @@ func chat(recap: bool = false):
 			Global.data["reputation"] += Ans[i + 1].to_float()
 		elif temp[i] == "ques":
 			ansindex = i
+		elif temp[i] == "choice":
+			for x in range(special["choice"][2]):
+				var choiceinstance = Button.new()
+				var choice = Ans[i + x + 1].split("<")
+				choiceinstance.text = choice[0]
+				$choice.show()
+				$choice/ScrollContainer/content.add_child(choiceinstance)
+				choiceinstance.pressed.connect(func():
+					var choicetemp = "me," + choice[0] + ","
+					if len(choice) > 1:
+						var content = Global.data["text"][choice[1]].split("=")
+						choicetemp += content[1] + ","
+					for y in range(len(Global.data["people_known"])):
+						if currenttext == Global.data["people_known"][y].keys()[0]:
+							Global.data["people_known"][y]["queue"] = choicetemp
+							print(Global.data["people_known"][y]["queue"])
+							break
+					check(currenttext)
+				)
 	if len(current) == 0 and !recap:
 		if special["ques"][1] > 0:
 			$answer.show()
@@ -189,10 +210,18 @@ func dateformatter(date_str: String) -> String:
 	
 
 func checkanswer():
-	$answer.hide()
 	var checkans = dateformatter(answer.get_node("LineEdit").text)
-	var temp = "me," + checkans + ","
-	if checkans.contains(Ans[ansindex + 1]):
+	$answer/dateconfirm.show()
+	$answer/dateconfirm/Yes.pressed.connect(func():
+		truecheck(checkans))
+	$answer/dateconfirm/No.pressed.connect(func():
+		$answer/dateconfirm.hide())
+	
+	
+func truecheck(answers):
+	$answer.hide()
+	var temp = "me," + answers + ","
+	if answers.contains(Ans[ansindex + 1]):
 		var content = Global.data["text"][Ans[ansindex + 2]].split("=")
 		temp += content[1] + ","
 	else:

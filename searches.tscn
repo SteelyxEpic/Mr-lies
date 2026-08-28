@@ -1,9 +1,21 @@
 [gd_scene format=3 uid="uid://bv3rf0vgf85fy"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oam8o"]
+bg_color = Color(0.6, 0.6, 0.8666667, 0.3019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujhxj"]
+bg_color = Color(0.6, 0.32156864, 0.8666667, 0.5058824)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8ud1"]
+bg_color = Color(0.6, 0.6, 0.8666667, 0.6392157)
+
 [node name="Searches" type="Button" unique_id=876315292]
 offset_right = 8.0
 offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_oam8o")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ujhxj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e8ud1")
 alignment = 0
 autowrap_mode = 3
