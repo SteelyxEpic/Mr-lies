@@ -7,4 +7,7 @@ func _ready() -> void:
 
 
 func main():
+	Global.override()
+	Transtition.times = 480
+	Transtition.timer.start()
 	Transtition.trans("main")

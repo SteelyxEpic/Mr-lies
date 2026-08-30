@@ -12,8 +12,17 @@
 [ext_resource type="Texture2D" uid="uid://cxyjppw2apvhg" path="res://waitweb.png" id="10_88chw"]
 [ext_resource type="PackedScene" uid="uid://bv3rf0vgf85fy" path="res://searches.tscn" id="11_n81s5"]
 [ext_resource type="Texture2D" uid="uid://dn6p7sb4a88sa" path="res://arrow.png" id="12_c6j5k"]
-[ext_resource type="Texture2D" uid="uid://o08td4dn54rd" path="res://icon.svg" id="13_3swsi"]
+[ext_resource type="Texture2D" uid="uid://7uap5op0edsn" path="res://avatar.png" id="13_3swsi"]
 [ext_resource type="PackedScene" uid="uid://d1npvhfmbyoyv" path="res://mediacontent.tscn" id="14_m1r6p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kxuq"]
+bg_color = Color(0.6, 0.6, 0.6, 0.3647059)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mti6b"]
+bg_color = Color(0.27450982, 0.28627452, 0.29803923, 0.5529412)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mm1bc"]
+bg_color = Color(0.6, 0.6, 0.6, 0.69803923)
 
 [node name="computer" type="Node2D" unique_id=478502015]
 script = ExtResource("1_8pqrt")
@@ -22,13 +31,6 @@ script = ExtResource("1_8pqrt")
 position = Vector2(589.00006, 329)
 scale = Vector2(1.2910156, 1.5625)
 texture = ExtResource("2_7ikar")
-
-[node name="shutdown" type="Button" parent="screen" unique_id=1942210657]
-offset_left = -430.6687
-offset_top = 156.8
-offset_right = -339.6687
-offset_bottom = 187.8
-text = "Shut down"
 
 [node name="mail" type="TextureButton" parent="screen" unique_id=778085968]
 offset_left = -416.72623
@@ -54,6 +56,33 @@ offset_bottom = 309.72
 scale = Vector2(0.377, 0.316)
 texture_normal = ExtResource("5_k4214")
 
+[node name="Panel" type="Panel" parent="screen" unique_id=1834959200]
+offset_left = -452.35706
+offset_top = 160.63998
+offset_right = 435.31604
+offset_bottom = 203.51999
+
+[node name="Time" type="RichTextLabel" parent="screen/Panel" unique_id=485235287]
+layout_mode = 0
+offset_left = 678.53546
+offset_top = 2.5599976
+offset_right = 881.47644
+offset_bottom = 42.559998
+theme_override_font_sizes/normal_font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="shutdown" type="Button" parent="screen/Panel" unique_id=1942210657]
+layout_mode = 0
+offset_left = 10.069545
+offset_top = 7.040004
+offset_right = 101.06954
+offset_bottom = 38.040005
+theme_override_styles/normal = SubResource("StyleBoxFlat_4kxuq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mti6b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mm1bc")
+text = "Shut down"
+
 [node name="word" type="RichTextLabel" parent="." unique_id=2046047211]
 visible = false
 offset_left = 422.0
@@ -65,7 +94,17 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 20
 text = "Mail"
 
+[node name="notifbox" type="VBoxContainer" parent="." unique_id=564427790]
+top_level = true
+offset_left = 882.00006
+offset_top = 215.0
+offset_right = 1154.0
+offset_bottom = 576.0
+mouse_filter = 2
+alignment = 2
+
 [node name="site" type="Sprite2D" parent="." unique_id=485101944]
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("6_wlfat")
 
 [node name="close" type="TextureButton" parent="site" unique_id=1670493318]
@@ -135,7 +174,7 @@ offset_bottom = 257.0
 
 [node name="content" type="HBoxContainer" parent="site/Chat/choice/ScrollContainer" unique_id=930371042]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 size_flags_vertical = 3
 
 [node name="people" type="ScrollContainer" parent="site/Chat" unique_id=1824909283]
@@ -168,6 +207,7 @@ theme_override_constants/separation = 4
 alignment = 2
 
 [node name="next" type="Button" parent="site/Chat" unique_id=1466461537]
+visible = false
 offset_left = -124.0
 offset_top = 201.0
 offset_right = 513.0
@@ -194,6 +234,7 @@ text = "Answer"
 
 [node name="dateconfirm" type="Node2D" parent="site/Chat/answer" unique_id=541991239]
 visible = false
+z_index = 100
 
 [node name="TextureRect" type="TextureRect" parent="site/Chat/answer/dateconfirm" unique_id=576835900]
 offset_left = -100.0
@@ -344,7 +385,6 @@ layout_mode = 2
 size_flags_vertical = 0
 offset_transform_enabled = true
 texture = ExtResource("13_3swsi")
-stretch_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="site/Media/HBoxContainer" unique_id=1807035195]
 layout_mode = 2
@@ -386,17 +426,19 @@ offset_top = -252.0
 offset_right = 439.0
 offset_bottom = -95.0
 theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
 
 [node name="content" type="RichTextLabel" parent="site/News" unique_id=1561884796]
 offset_left = -447.0
 offset_top = -68.0
 offset_right = 447.0
 offset_bottom = 218.0
+bbcode_enabled = true
 
-[connection signal="pressed" from="screen/shutdown" to="." method="shutdown"]
 [connection signal="pressed" from="screen/mail" to="." method="emailopen"]
 [connection signal="pressed" from="screen/web" to="." method="emailopen"]
 [connection signal="pressed" from="screen/chat" to="." method="emailopen"]
+[connection signal="pressed" from="screen/Panel/shutdown" to="." method="shutdown"]
 [connection signal="pressed" from="site/close" to="." method="emailclose"]
 [connection signal="pressed" from="site/Chat/next" to="site/Chat" method="chat"]
 [connection signal="focus_entered" from="site/Chat/answer/LineEdit" to="site/Chat" method="_on_line_edit_focus_entered"]

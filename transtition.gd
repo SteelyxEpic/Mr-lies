@@ -3,8 +3,45 @@ extends Node2D
 var tween: Tween
 var transtitioning: bool
 @onready var transs:Sprite2D = $Transtition
+@onready var timer = $Timer
+@onready var label = $Transtition/label
+var times = 480
 var zoom = 1
 
+signal timecall
+signal newday
+
+func _ready() -> void:
+	timer.timeout.connect(func():
+		emit_signal("timecall")
+		
+		if times >= 1440:
+			times -= 1440
+			emit_signal("newday")
+		if times == 480:
+			Global.reset()
+		times += 1)
+func end():
+	timer.stop()
+	zoom = 1
+	show()
+	var current_cam = get_viewport().get_camera_2d()
+	position = Vector2(600, 350)
+	if current_cam:
+		position.y = current_cam.global_position.y
+		position.x = current_cam.global_position.x
+		zoom = current_cam.zoom.x
+		scale = Vector2(1/zoom, 1/zoom)
+	transs.position.x = 0
+	tween = create_tween()
+	tween.tween_property(label, "modulate:a", 1, 1)
+	await get_tree().create_timer(1.5).timeout
+	tween.kill()
+	tween = create_tween()
+	tween.tween_property(label, "modulate:a", 0, 1)
+	await get_tree().create_timer(1).timeout
+	trans("title")
+	
 func trans(scene: String):
 	transtitioning = true
 	zoom = 1

@@ -2,4 +2,5 @@
 
 [node name="chatting" type="RichTextLabel" unique_id=918410565]
 z_index = 2
+bbcode_enabled = true
 fit_content = true

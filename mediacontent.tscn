@@ -15,10 +15,12 @@ layout_mode = 2
 [node name="media" type="RichTextLabel" parent="VBoxContainer" unique_id=204187519]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 50
-text = "fafadogasifjasofas"
+bbcode_enabled = true
+text = "fafadogasifjasofas "
 fit_content = true
 
 [node name="content" type="RichTextLabel" parent="VBoxContainer" unique_id=1950820307]
 layout_mode = 2
-text = "sda"
+bbcode_enabled = true
+text = "sda[url=\"my_action_key\"]click this specific part[/url]"
 fit_content = true

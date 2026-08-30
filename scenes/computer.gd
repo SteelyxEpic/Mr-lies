@@ -13,6 +13,7 @@ extends Node2D
 @onready var closes: TextureButton = $site/close
 @onready var word:RichTextLabel = $word
 @onready var email:Sprite2D = $site
+@onready var time = $screen/Panel/Time
 @onready var emailbg:Texture2D = preload("res://email.png")
 @onready var chatbg:Texture2D = preload("res://chatbg.png")
 @onready var webbg:Texture2D = preload("res://webbg.png")
@@ -27,7 +28,11 @@ var currenticon: TextureButton
 var prev:String
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_tree().create_tween().tween_property(screen, "modulate", Color(1.0, 1.0, 1.0, 1.0), 2)
+	timeforward()
+	Transtition.timecall.connect(timeforward)
+	Transtition.newday.connect(shutdown)
+	modulate = Color(0, 0, 0, 1.0)
+	get_tree().create_tween().tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 1.0), 2)
 	mail.mouse_entered.connect(func():
 		word.show()
 		word.text = "Mail")
@@ -66,14 +71,18 @@ func _ready() -> void:
 	chat.pressed.connect(func():
 		email.texture = chatbg
 		open(chat)
+		sitechat.recheck()
 		sitemedia.hide()
 		sitenews.hide()
 		sitechat.show()
 		sitewebsearch.hide()
 		sitemail.hide()
 		siteweb.hide())
-
+func timeforward():
+	var times = Transtition.times
+	time.text = str(floor(times/60)) + ":" + "%02d" % (times%60)
 func open(icon):
+	sitechat.reload()
 	if currenticon == icon:
 		close(icon)
 		return
@@ -129,12 +138,13 @@ func acceptemail(key:String):
 	Global.data["read"].append(key)
 		
 func close(icon):
+	sitechat.reload()
 	currenticon = null
 	var emailtween = get_tree().create_tween().set_parallel(true)
 	emailtween.tween_property(email, "position", icon.global_position + (icon.size/2*icon.scale), 0.2)
 	emailtween.tween_property(email, "scale", Vector2(0, 0), 0.2)
 func shutdown():
-	get_tree().create_tween().tween_property(screen, "modulate", Color(0, 0, 0, 1.0), 1)
+	get_tree().create_tween().tween_property(self, "modulate", Color(0, 0, 0, 1.0), 1)
 	Global.shut = true
 	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://scenes/main.tscn") 
@@ -155,6 +165,9 @@ func search(test:String = "", reload: bool = true):
 	var search: Button = sitewebsearch.get_node("search")
 	var searcharea: ScrollContainer = sitewebsearch.get_node("searcharea")
 	searcharea.hide()
+	sitewebsearch.get_node("searchbar").text = searches
+	sitewebsearch.get_node("searchbar").editable = false
+	siteweb.get_node("searchbar").text = ""
 	if reload:
 		search.disabled = true
 		loading.show()
@@ -182,9 +195,8 @@ func search(test:String = "", reload: bool = true):
 				
 				contentadd(i, x, query[i][x]))
 			searcharea.get_node("VBoxContainer").add_child(instance)
+	sitewebsearch.get_node("searchbar").editable = true
 	searcharea.get_node("VBoxContainer").move_child(searcharea.get_node("VBoxContainer").get_node("nomore"), -1)
-	sitewebsearch.get_node("searchbar").text = searches
-	siteweb.get_node("searchbar").text = ""
 	
 func returns():
 	sitemedia.hide()
@@ -195,8 +207,8 @@ func contentadd(type:String, title:String, content:String):
 	sitewebsearch.hide()
 	if type == "news":
 		sitenews.show()
-		sitenews.get_node("news").text = title
-		sitenews.get_node("content").text = content
+		sitenews.get_node("news").text = Global.checkkeyword(title)
+		sitenews.get_node("content").text = Global.checkkeyword(content)
 		email.texture = newsbg
 	elif type == "Media":
 		sitemedia.show()
@@ -206,9 +218,10 @@ func contentadd(type:String, title:String, content:String):
 		for i in Global.data["searches"][prev]["Media"].keys():
 			var instance = mediaprefab.instantiate()
 			mediacontent.add_child(instance)
-			instance.get_node("VBoxContainer/media").text = i
-			instance.get_node("VBoxContainer/content").text = Global.data["searches"][prev]["Media"][i]
+			instance.get_node("VBoxContainer/media").text = Global.checkkeyword(i)
+			instance.get_node("VBoxContainer/content").text = Global.checkkeyword(Global.data["searches"][prev]["Media"][i])
 		email.texture = mediabg
-	
+
+
 func _process(delta: float) -> void:
 	word.position = get_global_mouse_position() + Vector2(2, 2)

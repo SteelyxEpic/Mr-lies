@@ -12,3 +12,16 @@ z_index = 4096
 position = Vector2(1539, 9)
 scale = Vector2(2.3236606, 2.0961537)
 texture = ExtResource("2_8hy1t")
+
+[node name="label" type="RichTextLabel" parent="Transtition" unique_id=1977100692]
+modulate = Color(1, 1, 1, 0)
+offset_left = -198.82422
+offset_top = -110.201836
+offset_right = 236.2651
+offset_bottom = 114.97248
+theme_override_font_sizes/normal_font_size = 20
+text = "There wasn't enough money to pay for my bills......."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=857724415]

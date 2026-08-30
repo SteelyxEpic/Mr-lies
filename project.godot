@@ -22,7 +22,7 @@ Global="*uid://gle5hsa3d22p"
 
 [display]
 
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [editor_plugins]

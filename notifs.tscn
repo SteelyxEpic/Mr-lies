@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cdv7p630ovqfn"]
+
+[ext_resource type="Script" uid="uid://flerku6la6h3" path="res://notif.gd" id="1_cgflb"]
+
+[node name="notifs" type="PanelContainer" unique_id=312768924]
+script = ExtResource("1_cgflb")
+
+[node name="margin" type="MarginContainer" parent="." unique_id=460865604]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="text" type="RichTextLabel" parent="margin" unique_id=191401704]
+layout_mode = 2
+text = "\"what\" added into wordbox"
+fit_content = true
+
+[node name="Timer" type="Timer" parent="." unique_id=725517130]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="done"]
